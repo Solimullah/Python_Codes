@@ -1,0 +1,7 @@
+base_url: "https://dummyjson.com"
+credentials:
+  username: "testuser"
+  password: "testpassword"
+endpoints:
+  products: "/products"
+  login: "/auth/login"
