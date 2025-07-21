@@ -18,6 +18,12 @@ jobs:
     - name: Run tests
       run: |
         pytest ecommerce-qa-suite/tests
+    - name: Install Newman
+      run: |
+        npm install -g newman
+    - name: Run Postman tests
+      run: |
+        ./ecommerce-qa-suite/scripts/run_postman_tests.sh
     - name: Generate Allure Report
       uses: simple-elf/allure-report-action@v1
       with:

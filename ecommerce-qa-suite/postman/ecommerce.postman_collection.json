@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-a1b2-c3d4-e5f6a1b2c3d4",
+		"name": "Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add to Cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"products\": [\n        {\n            \"id\": 1,\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/carts/add",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checkout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cartId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/carts/1/checkout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"carts",
+						"1",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
