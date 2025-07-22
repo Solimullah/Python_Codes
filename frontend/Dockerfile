@@ -7,13 +7,6 @@ RUN npm install
 
 COPY . .
 
-# Build the production version
-RUN npm run build
+EXPOSE 5173
 
-# Install serve to serve built files
-RUN npm install -g serve
-
-EXPOSE 5000
-
-# Serve the built static files on the port Railway expects
-CMD ["serve", "-s", "dist", "-l", "5000"]
+CMD ["npm", "run", "dev"]
