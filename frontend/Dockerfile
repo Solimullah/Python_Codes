@@ -16,4 +16,4 @@ RUN npm install -g serve
 EXPOSE 4173
 
 # Serve the built static files on the port Railway expects
-CMD ["serve", "-s", "dist", "-l", "4173"]
+CMD ["serve", "-s", "dist", "-l", "5000"]
