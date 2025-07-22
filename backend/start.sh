@@ -1,6 +1,8 @@
 
 #!/bin/sh
 
+python -m main
+
 # Use Railway's PORT or default to 5000
 PORT=${PORT:-5000}
 
