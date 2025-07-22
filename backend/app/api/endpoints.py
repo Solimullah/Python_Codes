@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from datetime import timedelta
 
 from .. import crud, schemas, auth
+from ..crud import crud_task
+from ..schemas import task
 from ..db import database
 
 router = APIRouter()
@@ -47,6 +49,36 @@ def update_budget(budget_id: int, budget: schemas.budget.BudgetCreate, current_u
     if db_budget is None:
         raise HTTPException(status_code=404, detail="Budget not found")
     return db_budget
+
+@router.post("/tasks/", response_model=schemas.task.Task)
+def create_task(task: schemas.task.TaskCreate, db: Session = Depends(database.get_db)):
+    return crud.crud_task.create_task(db=db, task=task)
+
+@router.get("/tasks/", response_model=list[schemas.task.Task])
+def read_tasks(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+    tasks = crud.crud_task.get_tasks(db, skip=skip, limit=limit)
+    return tasks
+
+@router.get("/tasks/{task_id}", response_model=schemas.task.Task)
+def read_task(task_id: int, db: Session = Depends(database.get_db)):
+    db_task = crud.crud_task.get_task(db, task_id=task_id)
+    if db_task is None:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return db_task
+
+@router.put("/tasks/{task_id}", response_model=schemas.task.Task)
+def update_task(task_id: int, task: schemas.task.TaskCreate, db: Session = Depends(database.get_db)):
+    db_task = crud.crud_task.update_task(db=db, task_id=task_id, task=task)
+    if db_task is None:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return db_task
+
+@router.delete("/tasks/{task_id}", response_model=schemas.task.Task)
+def delete_task(task_id: int, db: Session = Depends(database.get_db)):
+    db_task = crud.crud_task.delete_task(db=db, task_id=task_id)
+    if db_task is None:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return db_task
 
 @router.delete("/budgets/{budget_id}", response_model=schemas.budget.Budget)
 def delete_budget(budget_id: int, current_user: schemas.user.User = Depends(auth.jwt.get_current_user), db: Session = Depends(database.get_db)):

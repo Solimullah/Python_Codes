@@ -34,3 +34,10 @@ class Transaction(Base):
 
     category = relationship("BudgetCategory", back_populates="transactions")
     owner = relationship("User", back_populates="transactions")
+
+class Task(Base):
+    __tablename__ = "tasks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    description = Column(String, index=True)
