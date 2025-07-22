@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./app /app
 
-CMD ["sh", "start.sh"]
+CMD ["python", "start.sh"]  # Or your backend start command
