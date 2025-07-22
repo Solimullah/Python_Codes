@@ -1,9 +1,0 @@
-{
-  "build": {
-    "builder": "dockerfile"
-  },
-  "start": "sh ./start.sh",
-  "env": {
-    "PORT": "5000"
-  }
-}
