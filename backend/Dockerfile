@@ -27,3 +27,5 @@ EXPOSE 5000
 
 # Run FastAPI app
 CMD ["./start.sh"]
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]
