@@ -1,73 +1,89 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
-        <div className="mb-6 text-center">
-          <img
-            src="https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/favicon.png"
-            alt="Jira"
-            className="mx-auto w-12 h-12"
+const LoginPage = () => {const [formData, setFormData] = useState({
+  email: '',
+  password: '',
+});
+const [error, setError] = useState('');
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData((prev) => ({ ...prev, [name]: value }));
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (!formData.email || !formData.password) {
+    setError('Please fill in all fields');
+    return;
+  }
+  setError('');
+  // Replace this with your actual login logic (e.g., API call)
+  console.log('Login form submitted:', formData);
+  // Reset form
+  setFormData({
+    email: '',
+    password: '',
+  });
+};
+
+return (
+  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h1 className="text-2xl font-bold text-center mb-6">Login to Task Manager</h1>
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter your email"
           />
-          <h1 className="text-2xl font-semibold mt-2">Log in to your account</h1>
         </div>
-
-        <form>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="you@example.com"
-              className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="••••••••"
-              className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-
-          <div className="flex items-center justify-between mb-6">
-            <label className="flex items-center text-sm text-gray-600">
-              <input type="checkbox" className="mr-2" />
-              Remember me
-            </label>
-            <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
-              Forgot password?
-            </Link>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md text-sm font-medium"
-          >
-            Log In
-          </button>
-        </form>
-
-        <div className="mt-6 text-center text-sm">
-          Don't have an account?{' '}
-          <Link to="/register" className="text-blue-600 hover:underline">
-            Sign up
-          </Link>
+        <div>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="mt-1 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter your password"
+          />
         </div>
-      </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-200"
+        >
+          Login
+        </button>
+      </form>
+      <p className="mt-4 text-center text-sm text-gray-600">
+        Don't have an account?{' '}
+        <Link to="/register" className="text-blue-500 hover:underline">
+          Register
+        </Link>
+      </p>
     </div>
-  );
+  </div>
+);
 };
 
 export default LoginPage;
