@@ -8,7 +8,7 @@ const Dashboard = () => {
   // Simulated authentication check
   useEffect(() => {
     // Replace with actual auth check (e.g., check token in localStorage or API)
-    const token = localStorage.getItem('authToken'); // Example: check for a token
+    const token = localStorage.getItem('token'); // Example: check for a token
     if (!token) {
       navigate('/login');
     } else {
