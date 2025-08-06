@@ -23,9 +23,9 @@ COPY . .
 RUN chmod +x start.sh
 
 # Expose the correct port
-EXPOSE 5000
+EXPOSE $PORT
 
 # Run FastAPI app
 CMD ["./start.sh"]
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "$PORT"]
